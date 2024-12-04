@@ -1,7 +1,6 @@
-import os
-from sqlalchemy import create_engine
+import os # incluido apenas para limpar a tela do console
+from sqlalchemy import create_engine, Column, String, Integer
 from sqlalchemy.orm import declarative_base, sessionmaker
-from sqlalchemy import Column, String, Integer
 
 # configurando a engine do DB
 engine = create_engine("sqlite:///db/database.db")
