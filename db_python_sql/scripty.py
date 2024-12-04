@@ -52,10 +52,38 @@ def select_usuarios(nome_usuario=''):
     finally:
         session.close
 
+# alterar registro
+def atualizar_usuario(id_usuario, nome_usuario, tipo_usuario):
+    session = Session()
+    try:
+        if all([id_usuario, nome_usuario, tipo_usuario]):
+            usuario = session.query(Usuario).filter(Usuario.id == id_usuario).first()
+            usuario.nome = nome_usuario
+            usuario.tipo = tipo_usuario
+            session.commit()
+            print(f'Usuário {nome_usuario} alterado com sucesso')
+        else:
+            print('É necessário informar o Id, nome e tipo do usuário')
+    except Exception as e:
+        print(f'Erro ao alterar usuário: {e}')
+    finally:
+        session.close()
+    
+# excluir registro
+def excluir_usuario(id):
+    session = Session()
+    try:
+        ...
+    except Exception as e:
+        ...
+    finally:
+        ...
+    
+
 if __name__ == '__main__':
     os.system('clear')
     Base.metadata.create_all(engine)
 #    insert_usuario('guilherme', 'Admin')
-    select_usuarios('')
-
+#    select_usuarios('')
+    atualizar_usuario(1,'Guilherme K','Super')
 
