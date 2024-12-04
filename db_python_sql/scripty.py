@@ -35,12 +35,27 @@ def insert_usuario(nome_usuario, tipo_usuario):
     finally:
         session.close
         
-
+# pesquisar por usuários
+def select_usuarios(nome_usuario=''):
+    session = Session()
+    try:
+        if nome_usuario:
+            dados = session.query(Usuario).filter(Usuario.nome == nome_usuario)
+        else:
+            dados = session.query(Usuario).all()
+        # aqui deveria retornar o resultado
+        for i in dados:
+            print(f'Usuário {i.nome} - Tipo: {i.tipo} - id: {i.id}')
+    except Exception as e:
+        print(f'Erro ao consultar usuário. Erro: {e}')
+        # não precisa session.rollback() pois não foi alterado nenhum registro
+    finally:
+        session.close
 
 if __name__ == '__main__':
     os.system('clear')
     Base.metadata.create_all(engine)
-    insert_usuario('guilherme', 'Admin')
-
+#    insert_usuario('guilherme', 'Admin')
+    select_usuarios('')
 
 
